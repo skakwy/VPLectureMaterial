@@ -15,6 +15,9 @@ Download and install VirtualBox on your system
 If you don't want to install a Linux distribution by your own, just download a ready-to-use Kali Linux VM
 https://www.kali.org/get-kali/#kali-virtual-machines
 
+# Installation on MacOs
+For this follow the guide in [macos.md](macos.md).
+
 ## Get Install Script (install everything via script)
 The following commands will download the installation script from the GitHub repo and run it.
 
