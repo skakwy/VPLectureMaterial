@@ -5,7 +5,7 @@ There might be a problem with the CC pin configuration or the USB 2.0 implementa
 A USB Hub acts as an active intermediary that correctly handles the USB-C handshake protocols which the board might be missing or implementing incorrectly. By connecting through a hub, the Mac acts as the host to the compliant hub, while the hub manages the simpler connection to the development board.
 # 2. Recommended Solution
 ## Hardware: Using a Hub
-If you do not have a compatible hub, the following model is known to bridge these compatibility gaps reliably: [Recommended USB-C Hub on Amazon](https://amzn.eu/d/gGiMBCe)
+If you do not have a compatible hub, the following model is known to work: [Recommended USB-C Hub on Amazon](https://amzn.eu/d/gGiMBCe)
 
 # !!!THIS IS JUST A THEORIE!!!
 I have no idea if thats the actual problem, however this fixed it for me and many of my classmates and
