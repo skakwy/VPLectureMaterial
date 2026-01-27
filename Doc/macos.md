@@ -12,7 +12,8 @@ I have no idea if thats the actual problem, however this fixed it for me and man
 this only applies to Silicon macs, for Intel there shouldnt be a problem.
 
 # 3. Software Environment Setup
-To develop for ARM-based microcontrollers like the STM32 on macOS, you need the cross-compiler toolchain and standard build utilities.
+To develop for ARM-based microcontrollers like the STM32 on macOS, you need the cross-compiler toolchain and standard build utilities. This will then work for vscode and eclipse. However vscode
+should only be used if you know what you're doing. I recommend using the [cortex Debug](https://marketplace.visualstudio.com/items?itemName=marus25.cortex-debug) extension rather than the one provided by st.
 ## Install Homebrew
 Homebrew is needed to install all kind of things (You should have used it before)
 ```bash
@@ -41,7 +42,32 @@ Verify the installation by checking the compiler version:
 ```bash
     arm-none-eabi-gcc --version
 ```
-## Troubleshooting
+
+# Eclipse
+To Use Eclipse you have to add the following to the project path by going to your workspace -> right click Project -> properties -> C/C++ Build -> Enviroment -> select path then click on edit and paste the following in at the front! `/opt/homebrew/bin:`. This will tell eclipse where all the build tools are so it can compile it properly. 
+## External Tool config
+For the Arguments use the following instead of the ones in the guide:
+```bash
+-f /opt/homebrew/Cellar/open-ocd/0.12.0_1/share/openocd/scripts/interface/stlink.cfg -f /opt/homebrew/Cellar/open-ocd/0.12.0_1/share/openocd/scripts/target/stm32g4x.cfg
+```
+You may have to change the path depending on the version you're using. Just go to finder `/opt/homebrew/Cellar/open-ocd/` and continue from there on
+
+For the location you can just use 
+```bash
+/opt/homebrew/bin/openocd
+```
+The rest is the same as in the Guide
+
+## Debug Config
+Do everything the same as in the normal guide except for command you can just do
+```bash
+arm-none-eabi-gdb
+```
+
+
+
+
+# Troubleshooting
 If Ghidra isn't found inside your terminal, add the following line to your .zshrc profile:
 
 ```bash
@@ -49,3 +75,4 @@ echo "alias ghidra='/opt/homebrew/Cellar/ghidra/*/libexec/ghidraRun'" | sudo tee
 ```
 Relaunch the terminal and it should work. If any other tool doesn't work, it's most likely a linking error.
 If nothing works at all please use the provided Kali Linux VM and contact the creator of this guide for any help so I can update/fix it: [email](mailto:nils_0805@icloud.com). 
+
