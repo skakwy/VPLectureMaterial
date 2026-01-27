@@ -163,7 +163,7 @@ $(OBJ_DIR)/%.o: %.c
 
 $(OBJ_DIR)/libstm32.a: $(OBJS_STM32LIB)
 	@echo "  AR      $(notdir $@)"
-	@ar rcs $@ $(OBJS_STM32LIB)
+	@$(AR) rcs $@ $(OBJS_STM32LIB)
 
 $(BLD_DIR)/app.elf: $(OBJ_DIR)/libstm32.a $(OBJS_ASM) $(APP_OBJS_C) | $(APP_LD_FILE)
 	@echo "  LD      $(notdir $@)"
