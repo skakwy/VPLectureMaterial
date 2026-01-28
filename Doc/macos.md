@@ -81,7 +81,6 @@ Create a launch.json inside the .vscode folder and paste in the following:
             "showDevDebugOutput": "none",
             "servertype": "stlink"
         }
-
     ]
 }
 ```
@@ -89,11 +88,21 @@ Create a launch.json inside the .vscode folder and paste in the following:
 
 
 # Troubleshooting
+## Ghidra:
 If Ghidra isn't found inside your terminal, add the following line to your .zshrc profile:
 
 ```bash
 echo "alias ghidra='/opt/homebrew/Cellar/ghidra/*/libexec/ghidraRun'" | sudo tee -a ~/.zshrc
 ```
+## Build error:
+if there's a build error trying to build the VPTemplate change line 
+164-166 with the following or copy the makefile in this repo:
+```c
+$(OBJ_DIR)/libstm32.a: $(OBJS_STM32LIB)
+	@echo "  AR      $(notdir $@)"
+	@$(AR) rcs $@ $(OBJS_STM32LIB)
+    ```
+
 Relaunch the terminal and it should work. If any other tool doesn't work, it's most likely a linking error.
 If nothing works at all please use the provided Kali Linux VM and contact the creator of this guide for any help so I can update/fix it: [email](mailto:nils_0805@icloud.com). 
 
