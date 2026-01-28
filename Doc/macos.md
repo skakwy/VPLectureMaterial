@@ -32,7 +32,7 @@ brew install --cask gcc-arm-embedded
 ## Install other tools that may be needed
 
 ```bash
-brew install ghidra cmake curl python@3.14 wget microsoft-openjdk@21 git
+brew install ghidra cmake curl python@3.14 wget microsoft-openjdk@21 git open-ocd
 ```
 ### ImHex
 [ImHex](https://imhex.werwolv.net) has to be downloaded manually since brew deprecated it
