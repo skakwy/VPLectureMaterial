@@ -94,6 +94,7 @@ If Ghidra isn't found inside your terminal, add the following line to your .zshr
 ```bash
 echo "alias ghidra='/opt/homebrew/Cellar/ghidra/*/libexec/ghidraRun'" | sudo tee -a ~/.zshrc
 ```
+Relaunch the terminal and it should work.
 ## Build error:
 if there's a build error trying to build the VPTemplate change line 
 164-166 with the following or copy the makefile in this repo:
@@ -103,6 +104,6 @@ $(OBJ_DIR)/libstm32.a: $(OBJS_STM32LIB)
 	@$(AR) rcs $@ $(OBJS_STM32LIB)
 ```
 
-Relaunch the terminal and it should work. If any other tool doesn't work, it's most likely a linking error.
+If any other tool doesn't work, it's most likely a linking error.
 If nothing works at all please use the provided Kali Linux VM and contact the creator of this guide for any help so I can update/fix it: [email](mailto:nils_0805@icloud.com). 
 
