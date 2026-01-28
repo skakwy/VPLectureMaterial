@@ -64,7 +64,28 @@ Do everything the same as in the normal guide except for command you can just do
 arm-none-eabi-gdb
 ```
 
+# Vscode
+Download the Recommended [cortex Debug](https://marketplace.visualstudio.com/items?itemName=marus25.cortex-debug) extension (probe rs would also work or other tools).
+Create a launch.json inside the .vscode folder and paste in the following:
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "cwd": "${workspaceFolder}",
+            "executable": "./build/app.elf",
+            "name": "Debug with ST-Link",
+            "request": "launch",
+            "type": "cortex-debug",
+            "runToEntryPoint": "main",
+            "showDevDebugOutput": "none",
+            "servertype": "stlink"
+        }
 
+    ]
+}
+```
+> **Warning:** The official development environment for this lecture is Eclipse. Use VS Code only if you are experienced and comfortable troubleshooting your own environment, as no support will be provided for VS Code-related issues.
 
 
 # Troubleshooting
