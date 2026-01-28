@@ -98,7 +98,7 @@ echo "alias ghidra='/opt/homebrew/Cellar/ghidra/*/libexec/ghidraRun'" | sudo tee
 Relaunch the terminal and it should work.
 ## Build error:
 if there's a build error trying to build the VPTemplate change line 
-164-166 with the following or copy the makefile in this repo:
+164-166 with the following or copy the makefile in this repo. This is an error made by Lecturer, he will fix this however for now use this fixed version:
 ```c
 $(OBJ_DIR)/libstm32.a: $(OBJS_STM32LIB)
 	@echo "  AR      $(notdir $@)"
