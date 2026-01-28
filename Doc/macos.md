@@ -41,6 +41,7 @@ brew install ghidra cmake curl python@3.14 wget microsoft-openjdk@21 git open-oc
 Verify the installation by checking the compiler version:
 ```bash
     arm-none-eabi-gcc --version
+    openocd --version
 ```
 
 # Eclipse
