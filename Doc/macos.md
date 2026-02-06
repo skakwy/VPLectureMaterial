@@ -32,7 +32,8 @@ brew install --cask gcc-arm-embedded
 ## Install other tools that may be needed
 
 ```bash
-brew install ghidra cmake curl python@3.14 wget microsoft-openjdk@21 git open-ocd
+brew install ghidra cmake curl python@3.14 wget microsoft-openjdk@21 git open-ocd@0.12.0
+brew pin open-ocd
 ```
 ### ImHex
 [ImHex](https://imhex.werwolv.net) has to be downloaded manually since brew deprecated it
@@ -45,25 +46,33 @@ Verify the installation by checking the compiler version:
 ```
 
 # Eclipse
-To Use Eclipse you have to add the following to the project path by going to your workspace -> right click Project -> properties -> C/C++ Build -> Enviroment -> select path then click on edit and paste the following in at the front! `/opt/homebrew/bin:`. This will tell eclipse where all the build tools are so it can compile it properly. 
+If eclipse doenst build rightaway you have to add homebrew to the project path. For this you have to type in `which openocd` and copy the path without the opencod in it, for example `/opt/homebrew/bin`.
+Copy that path and open eclipse -> right click Project -> properties -> C/C++ Build -> Enviroment -> select path then click on edit and paste the path you just copied.
+
 ## External Tool config
-For the Arguments use the following instead of the ones in the guide:
+Press on the arrow of external tool icon inside the top bar of eclipse. 
+
+![External Tool Icon](external_tool_icon.png)
+
+Then just copy the following into the Arguments text field:
 ```bash
 -f /opt/homebrew/Cellar/open-ocd/0.12.0_1/share/openocd/scripts/interface/stlink.cfg -f /opt/homebrew/Cellar/open-ocd/0.12.0_1/share/openocd/scripts/target/stm32g4x.cfg
 ```
-You may have to change the path depending on the version you're using. Just go to finder `/opt/homebrew/Cellar/open-ocd/` and continue from there on
 
-For the location you can just use 
+To get the path for the Location field run `which openocd` in your terminal and copy the path. For example:
 ```bash
 /opt/homebrew/bin/openocd
 ```
-The rest is the same as in the Guide
 
+Then Press on Build -> Specific Projects only -> Projects and select your project
 ## Debug Config
-Do everything the same as in the normal guide except for command you can just do
-```bash
-arm-none-eabi-gdb
-```
+For the Debug configuration select GDB Hardware Debugging. 
+- For Project select your Project
+- For C/C++ Application go to search Project and then select your desired app (app.elf for now, you have to build it first so eclipse can find it)
+
+Then go to the Debugger Tab
+- For the GDB command run `which arm-none-eabi-gdb` in your console and paste it in.
+- Change Connection to `localhost:3333``
 
 # Vscode
 Download the Recommended [cortex Debug](https://marketplace.visualstudio.com/items?itemName=marus25.cortex-debug) extension (probe rs would also work or other tools).
@@ -72,15 +81,16 @@ Create a launch.json inside the .vscode folder and paste in the following:
 {
     "version": "0.2.0",
     "configurations": [
-        {
+          {
             "cwd": "${workspaceFolder}",
             "executable": "./build/app.elf",
-            "name": "Debug with ST-Link",
+            "name": "Debug App",
             "request": "launch",
             "type": "cortex-debug",
             "runToEntryPoint": "main",
             "showDevDebugOutput": "none",
-            "servertype": "stlink"
+            "servertype": "openocd",
+            "configFiles": ["/opt/homebrew/Cellar/open-ocd/0.12.0_1/share/openocd/scripts/interface/stlink.cfg","/opt/homebrew/Cellar/open-ocd/0.12.0_1/share/openocd/scripts/target/stm32g4x.cfg"],
         }
     ]
 }
@@ -98,7 +108,7 @@ echo "alias ghidra='/opt/homebrew/Cellar/ghidra/*/libexec/ghidraRun'" | sudo tee
 Relaunch the terminal and it should work.
 ## Build error:
 if there's a build error trying to build the VPTemplate change line 
-164-166 with the following or copy the makefile in this repo. This is an error made by Lecturer, he will fix this however for now use this fixed version:
+164-166 with the following or copy the makefile in this repo. This is an error made by the Lecturer, he will fix this however for now use the fixed version:
 ```c
 $(OBJ_DIR)/libstm32.a: $(OBJS_STM32LIB)
 	@echo "  AR      $(notdir $@)"
